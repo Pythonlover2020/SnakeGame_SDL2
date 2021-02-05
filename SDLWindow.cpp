@@ -1,4 +1,3 @@
-/*coding:WINDOWS-936*/
 #include "SDLWindow.h"
 
 SDLWindow::SDLWindow(Uint32 init_flags,const char *title,int x, int y, int w,int h, Uint32 window_flags)
