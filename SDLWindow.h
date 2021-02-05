@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-#ifdef _WIN32/*coding:WINDOWS-936*/
+#ifdef _WIN32
 #ifndef SDLWINDOW_H
 #define SDLWINDOW_H
 
