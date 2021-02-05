@@ -1,14 +1,35 @@
-/*coding:WINDOWS-936*/
 #ifndef SNAKEGAME_H
 #define SNAKEGAME_H
 
 #include "SDLWindow.h"
-#include <time.h>
-#include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
 #define WIDTH 400
 #define HEIGHT 400
-#define FRAMESTATE 10
+#define FRAMERATE 10
 
+// 食物
+struct FOOD
+{
+    int x;
+    int y;
+};
+
+// 身体
+struct BODY
+{
+    int x;
+    int y;
+};
+
+// 蛇
+struct Snake
+{
+    int size; // 身体长度
+    BODY body[(WIDTH / 10) * (HEIGHT / 10)];
+};
+
+// 游戏状态
 enum GameState
 {
     START,
@@ -17,52 +38,34 @@ enum GameState
     PLAYING
 };
 
-// ����
-struct BODY
-{
-    int x;
-    int y;
-};
-
-// ʳ��
-struct FOOD
-{
-    int x;
-    int y;
-};
-
-// ��
-struct Snake
-{
-    unsigned int size; // ��������
-    BODY body[(WIDTH / 10) * (HEIGHT / 10)];
-};
-
 class SnakeGame : public SDLWindow
 {
     public:
         SnakeGame();
-        ~SnakeGame();
+        virtual ~SnakeGame();
 
         GameState gameState;
 
-        void draw(int dx,int dy);
-        void eventLoop();
-        void start();
-
-        SDL_Surface *image;
-        SDL_Texture *imageTexture;
-
-        Snake *snake;
-
-        void init_snake();
-        void init_food();
-
-        FOOD food;
+        void start(); // 开始游戏（相当于事件循环）
 
     protected:
 
     private:
+        void draw(); // 绘图
+
+        SDL_Surface *imageSurface;
+        SDL_Texture *imageTexture;
+        FILE *fp; // 日志
+
+        Snake *snake;
+        FOOD *food;
+
+        void initSnake();
+        void initFood();
+        void update(); // 更新坐标
+
+        int dx; // x轴的增量
+        int dy; // y轴的增量
 };
 
 #endif // SNAKEGAME_H
