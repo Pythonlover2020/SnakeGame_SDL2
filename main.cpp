@@ -1,4 +1,3 @@
-/*coding:WINDOWS-936*/
 #include "SnakeGame.h"
 
 int Main(int argc, char *argv[])
