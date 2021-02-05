@@ -1,11 +1,46 @@
-/*coding:WINDOWS-936*/
 #ifndef SDLWINDOW_H
 #define SDLWINDOW_H
 
 #include <SDL2/SDL.h>
 #include <iostream>
 
+#ifdef _WIN32/*coding:WINDOWS-936*/
+#ifndef SDLWINDOW_H
+#define SDLWINDOW_H
+
+#include <SDL2/SDL.h>
+#include <cstdio>
+#include <ctime>
+#include <cstdlib>
+
 #ifdef _WIN32
+#define Main SDL_main
+#endif // _WIN32
+
+#ifdef __linux__
+#define Main main
+#endif // __linux__
+
+class SDLWindow
+{
+    public:
+        SDLWindow(Uint32 init_flags,const char *title,int x, int y, int w,int h, Uint32 window_flags);
+        virtual ~SDLWindow();
+
+        SDL_Window *window;
+        SDL_Renderer *renderer;
+
+        FILE *log; // æ—¥å¿—
+
+        void show();
+
+    protected:
+
+    private:
+};
+
+#endif // SDLWINDOW_H
+
 #define Main SDL_main
 #endif // _WIN32
 
@@ -20,8 +55,8 @@ class SDLWindow
         virtual ~SDLWindow();
 
         int w,h;
-        SDL_Window *window; // ´°¿Ú
-        SDL_Renderer *renderer; // äÖÈ¾Æ÷
+        SDL_Window *window; // Â´Â°Â¿Ãš
+        SDL_Renderer *renderer; // Ã¤Ã–ÃˆÂ¾Ã†Ã·
 
     protected:
 
