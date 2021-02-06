@@ -137,6 +137,8 @@ void SnakeGame::draw()
 
         if (gameState == LOSE)
         {
+            fprintf(fp,"Snake size: %d\n",snake->size - 1);
+            fflush(fp);
             break;
         }
 
